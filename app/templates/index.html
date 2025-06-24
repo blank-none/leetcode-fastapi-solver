@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<h1 class="mb-4">LeetCode Problems</h1>
+
+{% for category, problems in categories.items() %}
+<div class="card mb-4">
+  <div class="card-header bg-primary text-white">{{ category }}</div>
+  <div class="card-body">
+    <div class="list-group">
+      {% for problem in problems %}
+      <a
+        href="/problem/{{ problem.id }}"
+        class="list-group-item list-group-item-action"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ problem.title }}</h5>
+          <span
+            class="badge bg-{{ 'success' if problem.difficulty == 'Easy' else 'warning' if problem.difficulty == 'Medium' else 'danger' }}"
+          >
+            {{ problem.difficulty }}
+          </span>
+        </div>
+        <p class="mb-1">{{ problem.description[:100] }}...</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock %}
